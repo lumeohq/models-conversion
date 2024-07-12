@@ -6,25 +6,25 @@
 
 ### Convert model
 
-#### 1. Download the YOLOv8 repo and install the requirements
+#### 1. Install Ultralytics YOLOv8 and dependencies
 
 ```
-git clone https://github.com/ultralytics/ultralytics.git
-cd ultralytics
-pip3 install -r requirements.txt
-python3 setup.py install
-pip3 install onnx onnxsim onnxruntime
+pip3 install ultralytics[export]
+pip3 install onnxsim cmake
 ```
 
 **NOTE**: It is recommended to use Python virtualenv or the [Ultralytics container](https://github.com/ultralytics/yolov5/wiki/Docker-Quickstart)
 
-#### 2. Copy conversor
+#### 2. Clone the Lumeo models-conversion repository
 
-Copy the `export_yoloV8.py` file from `models-convertion/yolo/onnx` directory to the `ultralytics` folder.
+```
+git clone https://github.com/lumeohq/models-conversion
+cd models-conversion
+```
 
 #### 3. Download the model
 
-Download the `pt` file from [YOLOv8](https://github.com/ultralytics/assets/releases/) releases (example for YOLOv8s)
+Download the `pt` file from [YOLOv8](https://github.com/ultralytics/assets/releases/) releases (example for YOLOv8s) to the "models-conversion" folder
 
 ```
 wget https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8s.pt
@@ -37,7 +37,7 @@ wget https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8s.pt
 Generate the ONNX model file (example for YOLOv8s)
 
 ```
-python3 export_yoloV8.py -w yolov8s.pt --dynamic
+python3 ./yolo/onnx/export_yoloV8.py -w yolov8s.pt --dynamic
 ```
 
 **NOTE**: To change the inference size (defaut: 640)
